@@ -34,7 +34,7 @@ ruby setup.rb config \
 ruby setup.rb setup
 
 rdoc --op rdoc lib
-rdoc --ri --op ri lib
+#rdoc --ri --op ri lib
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -43,7 +43,7 @@ install -d $RPM_BUILD_ROOT{%{ruby_archdir},%{ruby_ridir}}
 ruby setup.rb install \
 	--prefix=$RPM_BUILD_ROOT
 
-cp -a ri/ri/* $RPM_BUILD_ROOT%{ruby_ridir}
+#cp -a ri/ri/* $RPM_BUILD_ROOT%{ruby_ridir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -52,4 +52,4 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc rdoc
 %{ruby_rubylibdir}/builder*
-%{ruby_ridir}/*
+#%{ruby_ridir}/*
