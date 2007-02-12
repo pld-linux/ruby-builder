@@ -1,5 +1,5 @@
 Summary:	Simple builder to facilitate programatic generation of XML markup
-Summary(pl):	Proste narzêdzie do budowania u³atwiaj±ce programowe generowanie znaczników XML
+Summary(pl.UTF-8):   Proste narzÄ™dzie do budowania uÅ‚atwiajÄ…ce programowe generowanie znacznikÃ³w XML
 Name:		ruby-builder
 Version:	2.0.0
 Release:	1
@@ -17,9 +17,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 Simple builder to facilitate programatic generation of XML markup.
 
-%description -l pl
-Proste narzêdzie do budowania u³atwiaj±ce programowe generowanie
-znaczników XML.
+%description -l pl.UTF-8
+Proste narzÄ™dzie do budowania uÅ‚atwiajÄ…ce programowe generowanie
+znacznikÃ³w XML.
 
 %prep
 %setup -q -c
