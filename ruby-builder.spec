@@ -1,13 +1,13 @@
 Summary:	Simple builder to facilitate programatic generation of XML markup
 Summary(pl.UTF-8):	Proste narzędzie do budowania ułatwiające programowe generowanie znaczników XML
 Name:		ruby-builder
-Version:	2.0.0
+Version:	2.1.2
 Release:	1
 License:	Ruby's
 Group:		Development/Languages
-Source0:	http://rubyforge.org/frs/download.php/8400/builder-%{version}.gem
-# Source0-md5:	bd2bdac16b851ee482372e9d8c5a1c94
-URL:		http://code.whytheluckystiff.net/builder/
+Source0:	http://rubyforge.org/frs/download.php/21724/builder-%{version}.gem
+# Source0-md5:	e96a525d9e0b42a2e2d5e77cbd02eb72
+URL:		http://builder.rubyforge.org
 BuildRequires:	rake
 BuildRequires:	rpmbuild(macros) >= 1.277
 BuildRequires:	setup.rb = 3.3.1
@@ -52,4 +52,5 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc rdoc
 %{ruby_rubylibdir}/builder*
+%{ruby_rubylibdir}/blankslate.rb
 #%{ruby_ridir}/*
