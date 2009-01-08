@@ -27,11 +27,15 @@ znaczników XML.
 
 %package rdoc
 Summary:	Documentation files for builder
+Summary(pl.UTF-8):	Pliki dokumentacji do pakietu builder
 Group:		Documentation
 Requires:	ruby >= 1:1.8.7-4
 
 %description rdoc
 Documentation files for builder.
+
+%description rdoc -l pl.UTF-8
+Pliki dokumentacji do pakietu builder.
 
 %prep
 %setup -q -n builder-%{version}
