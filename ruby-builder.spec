@@ -8,9 +8,7 @@ Group:		Development/Languages
 Source0:	http://rubyforge.org/frs/download.php/21725/builder-%{version}.tgz
 # Source0-md5:	31e6ecd35af1659272659610a51a8211
 URL:		http://rubyforge.org/projects/builder
-BuildRequires:	rake
 BuildRequires:	rpmbuild(macros) >= 1.277
-BuildRequires:	setup.rb >= 3.3.1
 %{?ruby_mod_ver_requires_eq}
 #BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -41,27 +39,16 @@ Pliki dokumentacji do pakietu builder.
 %setup -q -n builder-%{version}
 
 %build
-cp /usr/share/setup.rb .
-ruby setup.rb config \
-	--rbdir=%{ruby_rubylibdir} \
-	--sodir=%{ruby_archdir}
-
-ruby setup.rb setup
-
 rdoc --op rdoc lib
-# /usr/lib/ruby/1.8/rdoc/markup/simple_markup/to_flow.rb:181:
-#in `convert_special': Unhandled special: Special: type=17, text="<!-- HI -->" (RuntimeError)
-#rdoc --ri --op ri lib
+rdoc --ri --op ri lib
 rm -f ri/created.rid
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{ruby_rubylibdir},%{ruby_ridir},%{ruby_rdocdir}}
 
-ruby setup.rb install \
-	--prefix=$RPM_BUILD_ROOT
-
-#cp -a ri/* $RPM_BUILD_ROOT%{ruby_ridir}
+cp -a lib/* $RPM_BUILD_ROOT%{ruby_rubylibdir}
+cp -a ri/* $RPM_BUILD_ROOT%{ruby_ridir}
 cp -a rdoc $RPM_BUILD_ROOT%{ruby_rdocdir}/%{name}-%{version}
 
 %clean
@@ -76,3 +63,4 @@ rm -rf $RPM_BUILD_ROOT
 %files rdoc
 %defattr(644,root,root,755)
 %{ruby_rdocdir}/%{name}-%{version}
+%{ruby_ridir}/Builder
