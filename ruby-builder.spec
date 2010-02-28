@@ -2,7 +2,7 @@ Summary:	Simple builder to facilitate programatic generation of XML markup
 Summary(pl.UTF-8):	Proste narzędzie do budowania ułatwiające programowe generowanie znaczników XML
 Name:		ruby-builder
 Version:	2.1.2
-Release:	1
+Release:	2
 License:	Ruby's
 Group:		Development/Languages
 Source0:	http://rubyforge.org/frs/download.php/21725/builder-%{version}.tgz
