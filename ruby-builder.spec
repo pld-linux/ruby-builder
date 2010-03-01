@@ -1,12 +1,13 @@
+%define pkgname builder
 Summary:	Simple builder to facilitate programatic generation of XML markup
 Summary(pl.UTF-8):	Proste narzędzie do budowania ułatwiające programowe generowanie znaczników XML
-Name:		ruby-builder
+Name:		ruby-%{pkgname}
 Version:	2.1.2
 Release:	2
 License:	Ruby's
 Group:		Development/Languages
-Source0:	http://rubyforge.org/frs/download.php/21725/builder-%{version}.tgz
-# Source0-md5:	31e6ecd35af1659272659610a51a8211
+Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
+# Source0-md5:	e96a525d9e0b42a2e2d5e77cbd02eb72
 URL:		http://rubyforge.org/projects/builder
 BuildRequires:	rpmbuild(macros) >= 1.277
 %{?ruby_mod_ver_requires_eq}
@@ -24,24 +25,39 @@ Proste narzędzie do budowania ułatwiające programowe generowanie
 znaczników XML.
 
 %package rdoc
-Summary:	Documentation files for builder
-Summary(pl.UTF-8):	Pliki dokumentacji do pakietu builder
+Summary:	HTML documentation for %{pkgname}
+Summary(pl.UTF-8):	Dokumentacja w formacie HTML dla %{pkgname}
 Group:		Documentation
 Requires:	ruby >= 1:1.8.7-4
 
 %description rdoc
-Documentation files for builder.
+HTML documentation for %{pkgname}.
 
 %description rdoc -l pl.UTF-8
-Pliki dokumentacji do pakietu builder.
+Dokumentacja w formacie HTML dla %{pkgname}.
+
+%package ri
+Summary:	ri documentation for %{pkgname}
+Summary(pl.UTF-8):	Dokumentacja w formacie ri dla %{pkgname}
+Group:		Documentation
+Requires:	ruby
+
+%description ri
+ri documentation for %{pkgname}.
+
+%description ri -l pl.UTF-8
+Dokumentacji w formacie ri dla %{pkgname}.
 
 %prep
-%setup -q -n builder-%{version}
+%setup -q -c
+%{__tar} xf %{SOURCE0} -O data.tar.gz | %{__tar} xz
+find -newer README  -o -print | xargs touch --reference %{SOURCE0}
 
 %build
 rdoc --op rdoc lib
 rdoc --ri --op ri lib
-rm -f ri/created.rid
+rm ri/created.rid
+rm -r ri/{BlankSlate,Fixnum,Kernel,Module,Object,String}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -63,4 +79,7 @@ rm -rf $RPM_BUILD_ROOT
 %files rdoc
 %defattr(644,root,root,755)
 %{ruby_rdocdir}/%{name}-%{version}
+
+%files ri
+%defattr(644,root,root,755)
 %{ruby_ridir}/Builder
