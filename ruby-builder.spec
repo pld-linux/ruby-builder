@@ -1,4 +1,5 @@
 %define pkgname builder
+%bcond_without 	doc
 Summary:	Simple builder to facilitate programatic generation of XML markup
 Summary(pl.UTF-8):	Proste narzędzie do budowania ułatwiające programowe generowanie znaczników XML
 Name:		ruby-%{pkgname}
@@ -54,18 +55,22 @@ Dokumentacji w formacie ri dla %{pkgname}.
 find -newer README  -o -print | xargs touch --reference %{SOURCE0}
 
 %build
+%if %{with doc}
 rdoc --op rdoc lib
 rdoc --ri --op ri lib
 rm ri/created.rid
 rm -r ri/{BlankSlate,Fixnum,Kernel,Module,Object,String}
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{ruby_rubylibdir},%{ruby_ridir},%{ruby_rdocdir}}
 
 cp -a lib/* $RPM_BUILD_ROOT%{ruby_rubylibdir}
+%if %{with doc}
 cp -a ri/* $RPM_BUILD_ROOT%{ruby_ridir}
 cp -a rdoc $RPM_BUILD_ROOT%{ruby_rdocdir}/%{name}-%{version}
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -77,9 +82,13 @@ rm -rf $RPM_BUILD_ROOT
 %{ruby_rubylibdir}/builder.rb
 
 %files rdoc
+%if %{with doc}
 %defattr(644,root,root,755)
 %{ruby_rdocdir}/%{name}-%{version}
+%endif
 
 %files ri
+%if %{with doc}
 %defattr(644,root,root,755)
 %{ruby_ridir}/Builder
+%endif
