@@ -11,6 +11,7 @@ Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
 # Source0-md5:	e96a525d9e0b42a2e2d5e77cbd02eb72
 URL:		http://rubyforge.org/projects/builder
 BuildRequires:	rpmbuild(macros) >= 1.277
+BuildRequires:	ruby-modules
 %{?ruby_mod_ver_requires_eq}
 #BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -81,14 +82,14 @@ rm -rf $RPM_BUILD_ROOT
 %{ruby_rubylibdir}/builder
 %{ruby_rubylibdir}/builder.rb
 
-%files rdoc
 %if %{with doc}
+%files rdoc
 %defattr(644,root,root,755)
 %{ruby_rdocdir}/%{name}-%{version}
 %endif
 
-%files ri
 %if %{with doc}
+%files ri
 %defattr(644,root,root,755)
 %{ruby_ridir}/Builder
 %endif
