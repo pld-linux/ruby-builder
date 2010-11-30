@@ -3,15 +3,16 @@
 Summary:	Simple builder to facilitate programatic generation of XML markup
 Summary(pl.UTF-8):	Proste narzędzie do budowania ułatwiające programowe generowanie znaczników XML
 Name:		ruby-%{pkgname}
-Version:	2.1.2
-Release:	2
+Version:	3.0.0
+Release:	1
 License:	Ruby's
 Group:		Development/Languages
 Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
-# Source0-md5:	e96a525d9e0b42a2e2d5e77cbd02eb72
+# Source0-md5:	cf9d2693d684a749e35dda886c4dc23c
 URL:		http://rubyforge.org/projects/builder
 BuildRequires:	rpmbuild(macros) >= 1.277
 BuildRequires:	ruby-modules
+Conflicts:	ruby-activesupport < 3.0.0
 %{?ruby_mod_ver_requires_eq}
 #BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
