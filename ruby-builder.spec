@@ -1,5 +1,8 @@
-%define pkgname builder
+#
+# Conditional build:
 %bcond_without 	doc
+
+%define	pkgname	builder
 Summary:	Simple builder to facilitate programatic generation of XML markup
 Summary(pl.UTF-8):	Proste narzędzie do budowania ułatwiające programowe generowanie znaczników XML
 Name:		ruby-%{pkgname}
