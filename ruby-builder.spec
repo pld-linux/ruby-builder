@@ -1,13 +1,13 @@
 #
 # Conditional build:
-%bcond_without 	doc
+%bcond_without	doc
 
 %define	pkgname	builder
 Summary:	Simple builder to facilitate programatic generation of XML markup
 Summary(pl.UTF-8):	Proste narzędzie do budowania ułatwiające programowe generowanie znaczników XML
 Name:		ruby-%{pkgname}
 Version:	3.0.0
-Release:	2
+Release:	3
 License:	Ruby's
 Group:		Development/Languages
 Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
@@ -55,11 +55,12 @@ ri documentation for %{pkgname}.
 Dokumentacji w formacie ri dla %{pkgname}.
 
 %prep
-%setup -q -c
-%{__tar} xf %{SOURCE0} -O data.tar.gz | %{__tar} xz
-find -newer README  -o -print | xargs touch --reference %{SOURCE0}
+%setup -q -n %{pkgname}-%{version}
 
 %build
+# write .gemspec
+%__gem_helper spec
+
 %if %{with doc}
 rdoc --op rdoc lib
 rdoc --ri --op ri lib
@@ -77,6 +78,10 @@ cp -a ri/* $RPM_BUILD_ROOT%{ruby_ridir}
 cp -a rdoc $RPM_BUILD_ROOT%{ruby_rdocdir}/%{name}-%{version}
 %endif
 
+# install gemspec
+install -d $RPM_BUILD_ROOT%{ruby_specdir}
+cp -p %{pkgname}-%{version}.gemspec $RPM_BUILD_ROOT%{ruby_specdir}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -85,6 +90,7 @@ rm -rf $RPM_BUILD_ROOT
 %{ruby_rubylibdir}/blankslate.rb
 %{ruby_rubylibdir}/builder
 %{ruby_rubylibdir}/builder.rb
+%{ruby_specdir}/%{pkgname}-%{version}.gemspec
 
 %if %{with doc}
 %files rdoc
