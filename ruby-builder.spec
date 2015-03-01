@@ -7,7 +7,7 @@ Summary:	Simple builder to facilitate programatic generation of XML markup
 Summary(pl.UTF-8):	Proste narzędzie do budowania ułatwiające programowe generowanie znaczników XML
 Name:		ruby-%{pkgname}
 Version:	3.0.0
-Release:	3
+Release:	4
 License:	Ruby's
 Group:		Development/Languages
 Source0:	http://rubygems.org/downloads/%{pkgname}-%{version}.gem
